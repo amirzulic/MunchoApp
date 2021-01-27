@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MUNCHO</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="icon" href='/stylesheets/ikona.gif'>
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.0.1/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.0.1/mapbox-gl.css' rel='stylesheet'>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+</head>
+<body id="bgHome">
+<nav class="navbar navbar-dark navbarAlter fixed-top">
+    <a class="navbar-brand" href="/">
+        <img src="./stylesheets/ikona.gif" width="30" height="30" class="d-inline-block align-top" alt="">
+        MUNCHO
+    </a>
+</nav>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col">
+            <div id='map' class='container' style='width: 550px; height: 300px;'></div>
+        </div>
+        <div class="col" id = "registrationForm">
+            <div class="container" style="text-align: center;">
+                <h1><b>Muncho</b></h1>
+                <p>Postanite član, unesite vaše podatke</p>
+                <hr>
+            </div>
+            <form method="POST" action="/ubaci">
+                <div class="form-row">
+                    <div class="col">
+                        <label for="firstName">Ime</label>
+                        <input type="text" class="form-control" placeholder="Ime" id="firstName" name="firstNameReg">
+                    </div>
+                    <div class="col">
+                        <label for="lastName">Prezime</label>
+                        <input type="text" class="form-control" placeholder="Prezime" id="lastName" name="lastNameReg">
+                    </div>
+                </div>
+                <div class="form-group pt-3">
+                    <label for="exampleFormControlInput1">Email adresa</label>
+                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Email adresa" name="emailAddressReg">
+                </div>
+                <div class="form-group">
+                    <label for="userAddress">Adresa</label>
+                    <input class="form-control form-control-sm" type="text" placeholder="Langitudijala" id="userLng" name="userLngReg">
+                    <input class="form-control form-control-sm" type="text" placeholder="Latitudijala" id="userLtd" name="userLtdReg">
+                </div>
+                <div class="form-row">
+                    <div class="col">
+                        <label for="inputPassword">Šifra</label>
+                        <input type="password" class="form-control" id="inputPassword" placeholder="Šifra" name="pwReg">
+                    </div>
+
+                </div>
+                <br>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-outline-warning">Potvrdi</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    mapboxgl.accessToken = 'pk.eyJ1IjoienVsaWNhbWlyIiwiYSI6ImNrampiOHVwMzAycWgyenMyOXRxYzVlZjIifQ._eX4vkgf2dpkmSw46C0kCw';
+
+
+    navigator.geolocation.getCurrentPosition(succesLocation, errorLocation, {enableHighAccuracy:true});
+
+    function succesLocation(position) {
+        console.log(position);
+        setupMap([position.coords.longitude, position.coords.latitude]);
+
+    }
+
+    function errorLocation() {
+        setupMap([18.4, 43.8]);
+
+    }
+
+    function setupMap(center) {
+        var map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/streets-v11',
+            center: center,
+            zoom: 15
+        });
+        map.on('style.load', function() {
+            map.on('click', function(e) {
+                var coordinates = e.lngLat;
+                console.log(coordinates);
+
+                new mapboxgl.Popup()
+                    .setLngLat(coordinates)
+                    .setHTML("Vaša adresa je unešena!")
+                    .addTo(map);
+
+                /*var marker = new mapboxgl.Marker({
+                    color: "#FFFFFF",
+                    draggable: true
+                }).setLngLat([coordinates.lng, coordinates.lat])
+                    .addTo(map);*/
+
+                $("#userLng").val(coordinates.lng);
+                $("#userLtd").val(coordinates.lat);
+            });
+        });
+    }
+
+    function posaljiAdresu() {
+        $.ajax({
+            url: "/artikal",
+            method: 'GET',
+            data: {
+            },
+            success: function( result ) {
+                alert("ok");
+            }
+        });
+    }
+</script>
+</body>
+</html>

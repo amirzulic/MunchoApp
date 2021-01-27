@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MUNCHO</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="icon" href='./stylesheets/ikona.gif'>
+</head>
+<body id="bgHome">
+<nav class="navbar navbar-dark navbarAlter fixed-top">
+    <a class="navbar-brand" href="/">
+        <img src="./public/stylesheets/ikona.gif" width="30" height="30" class="d-inline-block align-top" alt="">
+        MUNCHO
+    </a>
+</nav>
+<div class="container" id="orderContainer">
+    <table>
+        <% let ukupno = 0 %>
+        <% for(let i = 0; i < narudzba.length; i++) { %>
+            <tr>
+                <th><%= narudzba[i].naziv %></th>
+                <td><%= narudzba[i].cijena %></td>
+                <% ukupno+= parseInt(narudzba[i].cijena) %>
+            </tr>
+        <% } %>
+            <tr>
+                <th>Ukupno</th>
+                <td><%= ukupno %></td>
+            </tr>
+    </table>
+
+</div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MUNCHO</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="icon" href='./stylesheets/ikona.gif'>
+</head>
+<body id="bgHome">
+<nav class="navbar navbar-dark navbarAlter fixed-top">
+    <a class="navbar-brand" href="/">
+        <img src="./stylesheets/ikona.gif" width="30" height="30" class="d-inline-block align-top" alt="Logo">
+        MUNCHO
+    </a>
+</nav>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col">
+        </div>
+        <div class="col" id = "registrationForm">
+            <div class="container" style="text-align: center;">
+                <h1><b>Muncho</b></h1>
+                <h3>Artikli</h3>
+                <p>Popunite formu za dodavanje artikala</p>
+                <hr>
+            </div>
+            <form method="POST" action="/administrator-restoran/ubaci">
+                <div class="form-row">
+                    <div class="col">
+                        <label for="restName">Naziv artikla</label>
+                        <input type="text" class="form-control" placeholder="Naziv artikla" id="artikalName" name="artikalName">
+                    </div>
+                    <div class="col">
+                        <label for="restCity">Cijena</label>
+                        <input type="text" class="form-control" placeholder="Cijena" id="artikalPrice" name="artikalPrice">
+                    </div>
+                </div>
+                <div class="form-group pt-3">
+                    <label for="exampleFormControlInput1">Odaberite sliku</label>
+                    <br>
+                    <input type="file" id="myFile" class="btn btn-outline-danger" oninput="promjeniBoju()" name="artikalPicture">
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlSelect1">Odaberite kategoriju artikla</label>
+                    <select class="form-control" id="exampleFormControlSelect1" name="artikalCategory">
+                        <option value="1">1 - Brza hrana</option>
+                        <option value="2">2 - Meso</option>
+                        <option value="3">3 - Tjestenina</option>
+                        <option value="4">4 - Salata</option>
+                        <option value="5">5 - Pizza</option>
+                        <option value="6">6 - Kolač</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-outline-warning">Potvrdi</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    function promjeniBoju() {
+        document.getElementById("myFile").className = "btn btn-outline-success";
+    }
+</script>
+</body>
+</html>

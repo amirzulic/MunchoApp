@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MUNCHO</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="icon" href='./stylesheets/ikona.gif'>
+</head>
+<body id="bgHome">
+<nav class="navbar navbar-dark navbarAlter fixed-top">
+    <a class="navbar-brand" href="/">
+        <img src="./stylesheets/ikona.gif" width="30" height="30" class="d-inline-block align-top" alt="">
+        MUNCHO
+    </a>
+</nav>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col">
+        </div>
+        <div class="col" id = "registrationForm">
+            <div class="container" style="text-align: center;">
+                <h1><b>Muncho</b></h1>
+                <h3>Registracija dostavljača</h3>
+                <hr>
+            </div>
+            <form method="POST" action="/administrator/postavi">
+                <div class="form-row">
+                    <div class="col">
+                        <label for="firstName">Ime</label>
+                        <input type="text" class="form-control" placeholder="Ime" id="firstName" name="firstNameReg">
+                    </div>
+                    <div class="col">
+                        <label for="lastName">Prezime</label>
+                        <input type="text" class="form-control" placeholder="Prezime" id="lastName" name="lastNameReg">
+                    </div>
+                </div>
+                <div class="form-group pt-3">
+                    <label for="exampleFormControlInput1">Email adresa</label>
+                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Email adresa" name="emailAddressReg">
+                </div>
+                <div class="form-group">
+                    <label for="userAddress">Vaša adresa</label>
+                    <input class="form-control" type="text" placeholder="Vaša adresa" id="userAddress" name="userAddressReg">
+                </div>
+                <div class="form-row">
+                    <div class="col">
+                        <label for="inputPassword">Šifra</label>
+                        <input type="password" class="form-control" id="inputPassword" placeholder="Šifra" name="pwReg">
+                    </div>
+
+                </div>
+                <br>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-outline-warning">Potvrdi</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,60 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+* {
+  font-family: Arial;
+}
+
+.navbarAlter {
+  background: rgba(100,100,100,0);
+  color: white;
+  margin: 0px 0px 15px 15px;
+}
+
+#bgHome {
+  background-image: url("https://i.pinimg.com/originals/d3/6d/46/d36d462db827833805497d9ea78a1343.jpg");
+  background-size: cover;
+}
+
+#adressDiv {
+  background: rgba(255, 255, 255, 0.8);
+  background-size: cover;
+  padding: 30px;
+  text-align: center;
+  border-radius: 15px;
+}
+
+#homeCategories {
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 15px;
+  padding: 15px;
+}
+
+#loginForm {
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 15px;
+  padding: 30px;
+}
+
+#registrationForm {
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 15px;
+  padding: 30px;
+}
+
+#orderContainer {
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 15px;
+  padding: 30px;
+}
+
+#slika {
+  height: 200px;
+  width: 500px;
+}
