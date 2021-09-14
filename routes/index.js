@@ -104,13 +104,11 @@ router.post('/ubaci', function(req, res, next) {
 });
 
 router.post("/prijavi", passport.authenticate('local', {
-  successRedirect: "/",
-  failureRedirect: "/restorani",
-  passReqToCallback: true,
-  failureFlash: true
-}, function(req, res) {
-  req.session.cookie.maxAge = 30 * 24 * 60 * 60 * 1000;
-}));
+  failureRedirect: "/prijava",
+}), function(req, res) {
+  console.log('request')
+  res.redirect('/');
+});
 
 
 
@@ -119,27 +117,24 @@ router.post("/prijavi", passport.authenticate('local', {
     done(null, user);
   });
 
-  if (session) {
-    passport.deserializeUser((id, done) => {
-      pool.connect(function (err, client, done) {
+  passport.deserializeUser((user, cb) => {
+    pool.connect(function (err, client, done) {
+      if (err) {
+        res.end('{"error" : "Error", "status": 500}');
+      }
+
+      client.query(`select * from Korisnik where idKorisnik = ${user.id};`, [], function (err, results) {
+        done();
         if (err) {
-          res.end('{"error" : "Error", "status": 500}');
+          console.log(err);
+          return done(err);
         }
-
-        client.query(`select * from Korisnik where idKorisnik = ${id};`, [], function (err, result) {
-          done();
-          if (err) {
-            console.log(err);
-            return done(err);
-          }
-          done(null, results.rows[0]);
-        })
-      });
+        cb(null, results.rows[0]);
+      })
     });
+  });
 
-  }
-
-  passport.use('local', new LocalStrategy({}, (username, password, done) => {
+  passport.use('local', new LocalStrategy( (username, password, cb) => {
 
     loginAttempt();
 
@@ -161,13 +156,14 @@ router.post("/prijavi", passport.authenticate('local', {
             bcrypt.compare(password, user.hash, function (err, res) {
               if (res) {
                 console.log("Dobar pw");
-                done(null, {id: user.id, email: user.email, ime: user.ime});
+                console.log(user)
+                cb(null, {id: user.idkorisnik, email: user.email, ime: user.ime});
               } else {
-                done(null, false);
+                cb(null, false);
               }
             })
           } else {
-            done(null, false);
+            cb(null, false);
           }
         });
       });
